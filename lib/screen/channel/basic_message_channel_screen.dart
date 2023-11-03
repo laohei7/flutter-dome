@@ -31,7 +31,7 @@ class _BasicMessageChannelScreenState extends State<BasicMessageChannelScreen> {
     // 用于接收Android使用send()方法传递过来的数据，同Android的一样
     basicMessageChannel.setMessageHandler((message) async {
       print(message);
-      return null; //TODO Android接收Flutter返回则值没有成功，原因暂未确定
+      return "Hello Android";
     });
     textEditingController = TextEditingController();
   }

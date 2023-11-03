@@ -33,7 +33,11 @@ class MainActivity : FlutterActivity() {
                     )
                 )
             }
-            send("Flutter 你好") // 向Flutter发送数据
+            send("Flutter 你好") // 向Flutter发送数据，没有回调函数，无法接收Flutter返回的数据
+//            向Flutter发送数据，有回调函数，接收Flutter返回的数据
+            send("Flutter 你好，我可以接收数据") { message ->
+                Log.d(TAG, "configureFlutterEngine: Send Message To Flutter And Receive: $message")
+            }
         }
     }
 }
