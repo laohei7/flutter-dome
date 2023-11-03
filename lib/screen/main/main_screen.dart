@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_dome/controller/main_side_menu_controller.dart';
 import 'package:learn_dome/model/side_menu_model.dart';
 import 'package:learn_dome/screen/channel/basic_message_channel_screen.dart';
+import 'package:learn_dome/screen/channel/method_channel_screen.dart';
 import 'package:learn_dome/screen/error/error_screen.dart';
 import 'package:learn_dome/screen/main/main_side_menu.dart';
 import 'package:learn_dome/widget/responsive_widget.dart';
@@ -66,8 +67,11 @@ class MainScreen extends StatelessWidget {
       onTap: (id) {
         String route;
         switch (id) {
-          case 1:
+          case 0:
             route = BasicMessageChannelScreen.route;
+            break;
+          case 1:
+            route = MethodChannelScreen.route;
             break;
           default:
             route = ErrorScreen.route;

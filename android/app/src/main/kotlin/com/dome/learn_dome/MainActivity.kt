@@ -1,6 +1,9 @@
 package com.dome.learn_dome
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
+import com.dome.learn_dome.channel.MethodChannelDome
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.BasicMessageChannel
@@ -14,6 +17,7 @@ class MainActivity : FlutterActivity() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 //        注册BasicMessageChannel
@@ -39,5 +43,8 @@ class MainActivity : FlutterActivity() {
                 Log.d(TAG, "configureFlutterEngine: Send Message To Flutter And Receive: $message")
             }
         }
+
+//        初始化MethodChannel
+        MethodChannelDome(this, flutterEngine)
     }
 }
