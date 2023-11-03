@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:learn_dome/controller/main_side_menu_controller.dart';
 import 'package:learn_dome/screen/channel/basic_message_channel_screen.dart';
+import 'package:learn_dome/screen/channel/method_channel_screen.dart';
 import 'package:learn_dome/screen/error/error_screen.dart';
 import 'package:learn_dome/screen/main/main_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -54,6 +56,9 @@ class MyApp extends StatelessWidget {
       case BasicMessageChannelScreen.route:
         widget = const BasicMessageChannelScreen();
         break;
+      case MethodChannelScreen.route:
+        widget = const MethodChannelScreen();
+        break;
       default:
         widget = const ErrorScreen();
         break;
@@ -61,7 +66,8 @@ class MyApp extends StatelessWidget {
     return widget;
   }
 
-  Widget _buildProviderForWidget<T extends ChangeNotifier>(T controller, Widget widget) {
+  Widget _buildProviderForWidget<T extends ChangeNotifier>(
+      T controller, Widget widget) {
     return ChangeNotifierProvider(
       create: (context) => controller,
       child: widget,
