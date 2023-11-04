@@ -3,6 +3,7 @@ package com.dome.learn_dome
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.dome.learn_dome.channel.EventChannelDome
 import com.dome.learn_dome.channel.MethodChannelDome
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -15,6 +16,9 @@ class MainActivity : FlutterActivity() {
         val TAG = MainActivity::class.java.simpleName
         const val BASIC_Message_Channel_Name = "com.dome/channel/basic"
     }
+
+    //    用于注销WiFi广播监听
+    private lateinit var eventChannelDome: EventChannelDome
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -46,5 +50,13 @@ class MainActivity : FlutterActivity() {
 
 //        初始化MethodChannel
         MethodChannelDome(this, flutterEngine)
+
+//        初始化EventChannel
+        eventChannelDome = EventChannelDome(this, flutterEngine)
+    }
+
+    override fun onDestroy() {
+        eventChannelDome.unregisterBroadcast() // 注销wifi广播
+        super.onDestroy()
     }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_dome/controller/main_side_menu_controller.dart';
 import 'package:learn_dome/model/side_menu_model.dart';
 import 'package:learn_dome/screen/channel/basic_message_channel_screen.dart';
+import 'package:learn_dome/screen/channel/event_channel_screen.dart';
 import 'package:learn_dome/screen/channel/method_channel_screen.dart';
 import 'package:learn_dome/screen/error/error_screen.dart';
 import 'package:learn_dome/screen/main/main_side_menu.dart';
@@ -72,6 +73,9 @@ class MainScreen extends StatelessWidget {
             break;
           case 1:
             route = MethodChannelScreen.route;
+            break;
+          case 2:
+            route = EventChannelScreen.route;
             break;
           default:
             route = ErrorScreen.route;
