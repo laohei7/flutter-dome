@@ -3,6 +3,7 @@ import 'package:learn_dome/model/side_menu_model.dart';
 import 'package:learn_dome/screen/channel/basic_message_channel_screen.dart';
 import 'package:learn_dome/screen/channel/event_channel_screen.dart';
 import 'package:learn_dome/screen/channel/method_channel_screen.dart';
+import 'package:learn_dome/screen/route/route_screen.dart';
 
 class MainSideMenuController extends ChangeNotifier {
   final _menus = <SideMenuModel>[
@@ -10,6 +11,7 @@ class MainSideMenuController extends ChangeNotifier {
         widget: const BasicMessageChannelScreen()),
     SideMenuModel(1, "MethodChannel", "", widget: const MethodChannelScreen()),
     SideMenuModel(2, "EventChannel", "", widget: const EventChannelScreen()),
+    SideMenuModel(3, "Route", "", widget: const RouteScreen()),
   ];
 
   List<SideMenuModel> get menus => _menus;

@@ -5,6 +5,8 @@ import 'package:learn_dome/screen/channel/event_channel_screen.dart';
 import 'package:learn_dome/screen/channel/method_channel_screen.dart';
 import 'package:learn_dome/screen/error/error_screen.dart';
 import 'package:learn_dome/screen/main/main_screen.dart';
+import 'package:learn_dome/screen/route/route_navigator_screen.dart';
+import 'package:learn_dome/screen/route/route_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -23,9 +25,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+
+      // 初始路由，效果同home参数，程序启动时第一个页面
       initialRoute: MainScreen.route,
+
+      // 简单路由配置，k-v形式
+      // routes: {
+      //   MainScreen.route: (_) => const MainScreen(),
+      // },
+
+      // 动态路由配置，通过settings允许参数传递，路由拦截等功能
       onGenerateRoute: (settings) {
+        // 获取需要跳转的页面
         final widget = _buildWidgetBySettings(settings);
+
+        // 使用PageRouteBuilder自定义页面跳转动画，也可以使用MaterialPageRoute等默认的跳转动画。
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => widget,
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -46,27 +60,23 @@ class MyApp extends StatelessWidget {
   Widget _buildWidgetBySettings(RouteSettings settings) {
     final route = settings.name;
     debugPrint(route);
-    Widget? widget;
-    switch (route) {
-      case MainScreen.route:
-        widget = _buildProviderForWidget<MainSideMenuController>(
+
+    Widget widget = switch (route) {
+      MainScreen.route => _buildProviderForWidget<MainSideMenuController>(
           MainSideMenuController(),
           const MainScreen(),
-        );
-        break;
-      case BasicMessageChannelScreen.route:
-        widget = const BasicMessageChannelScreen();
-        break;
-      case MethodChannelScreen.route:
-        widget = const MethodChannelScreen();
-        break;
-      case EventChannelScreen.route:
-        widget = const EventChannelScreen();
-        break;
-      default:
-        widget = const ErrorScreen();
-        break;
-    }
+        ),
+      BasicMessageChannelScreen.route => const BasicMessageChannelScreen(),
+      MethodChannelScreen.route => const MethodChannelScreen(),
+      EventChannelScreen.route => const EventChannelScreen(),
+      RouteScreen.route => const RouteScreen(),
+      RouteNavigatorScreen.route => RouteNavigatorScreen(
+          params: settings.arguments != null
+              ? settings.arguments as Map<String, dynamic>
+              : null,
+        ),
+      _ => const ErrorScreen(),
+    };
     return widget;
   }
 

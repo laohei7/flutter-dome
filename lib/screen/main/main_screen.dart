@@ -6,6 +6,7 @@ import 'package:learn_dome/screen/channel/event_channel_screen.dart';
 import 'package:learn_dome/screen/channel/method_channel_screen.dart';
 import 'package:learn_dome/screen/error/error_screen.dart';
 import 'package:learn_dome/screen/main/main_side_menu.dart';
+import 'package:learn_dome/screen/route/route_screen.dart';
 import 'package:learn_dome/widget/responsive_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -66,21 +67,13 @@ class MainScreen extends StatelessWidget {
   Widget _buildMobileMainScreen(BuildContext context) {
     return MainSideMenu(
       onTap: (id) {
-        String route;
-        switch (id) {
-          case 0:
-            route = BasicMessageChannelScreen.route;
-            break;
-          case 1:
-            route = MethodChannelScreen.route;
-            break;
-          case 2:
-            route = EventChannelScreen.route;
-            break;
-          default:
-            route = ErrorScreen.route;
-            break;
-        }
+        String route = switch (id) {
+          0 => BasicMessageChannelScreen.route,
+          1 => MethodChannelScreen.route,
+          2 => EventChannelScreen.route,
+          3 => RouteScreen.route,
+          _ => ErrorScreen.route,
+        };
         Navigator.pushNamed(context, route);
       },
       items: context.select<MainSideMenuController, List<SideMenuModel>>(
